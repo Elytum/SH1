@@ -1,7 +1,5 @@
 #include "../../includes/ft_sh1.h"
 
-// arthur
-
 static void		ft_trucbidule(t_env *e)
 {
 	char		tmp[2];

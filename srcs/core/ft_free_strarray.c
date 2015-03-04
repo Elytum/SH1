@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_sh1.h"
 
-// done
-
 void	ft_free_strarray(char ***array)
 {
 	char **ptr;

@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_sh1.h"
 
-// arthur
-
 int			ft_clear_imput(t_env *e)
 {
 	int		len;

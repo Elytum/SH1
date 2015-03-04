@@ -39,11 +39,6 @@ static void			ft_launch(t_env *shell)
 
 	if (!(inputs = ft_strsplit(shell->str, ';')))
 		return ;
-	// if (ft_strlen(inputs) > 2 && inputs[0] == ';' && inputs[1])
-	// {
-	// 	free()
-	// }
-	
 	if (shell->str)
 	{
 		free(shell->str);
@@ -65,7 +60,6 @@ int					ft_reboot_imput(t_env *shell)
 {
 	int				value;
 
-	// ft_init_signals();
 	while ((value = ft_get_inputs(shell)))
 	{
 		if (value == 0)
@@ -75,7 +69,6 @@ int					ft_reboot_imput(t_env *shell)
 		if (!(ft_clean_env(shell)))
 			break ;
 	}
-	// exit(0);
 	return (0);
 }
 
@@ -92,6 +85,8 @@ static int			ft_minishell(char **envp)
 	tputs(tgetstr("ve", (char **)(&shell->p->buf)), 1, ft_putc);
 	tputs(tgetstr("vs", (char **)(&shell->p->buf)), 1, ft_putc);
 	ft_reboot_imput(shell);
+	// free(shell->name_shell);
+	// free(shell->name_process);
 	// while ((value = ft_get_inputs(shell)))
 	// {
 	// 	if (value == 0)

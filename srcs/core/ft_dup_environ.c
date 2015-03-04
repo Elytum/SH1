@@ -21,8 +21,6 @@ t_params		*ft_get_params(void)
 	p->c_pos_x = 0;
 	p->c_pos_y = 0;
 	p->print = 0;
-	// if (!(p->v_term = ft_strdup("xterm-256color")))
-		// return (NULL);
 	if (tgetent(p->buf, p->v_term) < 1)
 		return (NULL);
 	tcgetattr(0, &p->term);
@@ -30,6 +28,7 @@ t_params		*ft_get_params(void)
 	p->term.c_lflag &= ~(ECHO);
 	p->term.c_cc[VMIN] = 1;
 	p->term.c_cc[VTIME] = 0;
+	sing_oldterm(p->oldterm);
 	if (tcsetattr(0, TCSADRAIN, &p->term) == -1)
 		return (NULL);
 	p->max_size = 1;

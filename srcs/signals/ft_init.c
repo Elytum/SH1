@@ -1,5 +1,13 @@
 #include "../../includes/ft_sh1.h"
-#include <stdio.h>
+
+BYPASS					*sing_oldterm(BYPASS *term)
+{
+	static BYPASS	*old;
+
+	if (term != NULL)
+		old = term;
+	return (old);
+}
 
 static void			ft_sig_to_reload(int sig_num)
 {
@@ -10,7 +18,7 @@ static void			ft_sig_to_reload(int sig_num)
 	{
 		if (shell->cpid)
 		{
-			write(0, "^F\n", 3);
+			write(0, "^C\n", 3);
 			shell->cpid = 0;
 		}
 		else
@@ -23,9 +31,6 @@ static void			ft_sig_to_reload(int sig_num)
 			shell->max = 0;
 		}
 	}
-	// else if (sig_num == SIGSYS)
-	else
-		write(1, "COUCOU C'EST MOI\n", 17);
 }
 
 static void			ft_sigterm(int sig_num)
@@ -34,15 +39,10 @@ static void			ft_sigterm(int sig_num)
 
 	shell = ft_call_env(NULL);
 	ft_putstr("\nGladOsh: Did you really try to kill me ? Hehe, no chance !\n");
-	// shell->index = 0;
-	// shell->max = 0;
-	// ft_putstr(shell->name);
 	free(shell->str);
 	shell->str = ft_strdup("");
 	shell->index = 0;
 	shell->max = 0;
-	// ft_clean_env(shell);
-	// ft_reboot_imput(shell);
 	return ;
 	(void)sig_num;
 }
@@ -70,18 +70,19 @@ static void			ft_sig_to_exit(int sig_num)
 	else if (sig_num == SIGXCPU)
 		ft_putstr(": size limit exceeded ");
 	ft_putendl(shell->name_shell);
+	tcsetattr(0, 0, sing_oldterm(NULL));
 	exit(0);
 }
 
 static void			ft_sigstop(int sig_num)
-{ //To handle for real
+{
 	ft_putstr("shell: suspended (signal) shell\n");
 	exit(0);
 	(void)sig_num;
 }
 
 static void			ft_sig_define_user(int sig_num)
-{ //To handle for real
+{
 	if (sig_num == SIGUSR1)
 		ft_putstr("shell: user-defined signal 1 shell\n");
 	else if (sig_num == SIGUSR2)
@@ -90,14 +91,14 @@ static void			ft_sig_define_user(int sig_num)
 }
 
 static void			ft_sigprof(int sig_num)
-{ //To handle for real
+{
 	ft_putstr("shell: profile signal shell\n");
 	exit(0);
 	(void)sig_num;
 }
 
 static void			ft_sigtrap(int sig_num)
-{ //To handle for real
+{
 	ft_putstr("shell: trace trap shell\n");
 	exit(0);
 	(void)sig_num;

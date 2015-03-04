@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_sh1.h"
 
-// arthur
-
 static void	ft_process_fchar(t_env *e, char *inputs)
 {
 	char	*tmp;

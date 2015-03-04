@@ -41,18 +41,6 @@ static	char	*ft_get_word(char **str, char *quote)
 	return (ft_redup(&word));
 }
 
-static size_t	ft_parse_loop(t_env *shell, char **str, char quote)
-{
-	// char		*tmp;
-	// size_t		v;
-	// char		quote;
-	return (0);
-	shell++;
-	str++;
-	quote++;
-
-}
-
 static size_t	ft_parse_len(t_env *shell, char **str)
 {
 	char		*tmp;
@@ -64,7 +52,7 @@ static size_t	ft_parse_len(t_env *shell, char **str)
 	v = 0;
 	ptr = *str;
 	if (*(*str + ft_strlen(*str)) == '\\')
-		return (ft_parse_loop(shell, str, '\\'));
+		return (0);
 	while (*ptr)
 	{
 		tmp = ft_get_word(&ptr, &quote);
@@ -74,8 +62,9 @@ static size_t	ft_parse_len(t_env *shell, char **str)
 		v++;
 	}
 	if (quote)
-		return (ft_parse_loop(shell, str, quote));
+		return (0);
 	return (v);
+	(void)shell;
 }
 
 char			**ft_parse_args(t_env *shell, char *input)

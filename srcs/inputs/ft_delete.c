@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_sh1.h"
 
-// arthur
-
 int			ft_process_delete(t_env *e)
 {
 	char	*tmp;

@@ -51,11 +51,7 @@ static void		ft_composepath(t_env *shell)
 		ft_linkpathfree(&(shell->path), "/sbin", ':');
 	if (access("/usr/sbin", F_OK) == 0)
 		ft_linkpathfree(&(shell->path), "/usr/sbin", ':');
-	if (access("/opt/X11/bin", F_OK) == 0)
-	// 	ft_linkpathfree(&(shell->path), "/opt/X11/bin", ':');
-	// if (access("/usr/texbin", F_OK) == 0)
-	// 	ft_linkpathfree(&(shell->path), "/usr/texbin", ':');
-	// if (shell->path && *shell->path)
+	if (shell->path && *shell->path)
 		ft_set_env_value(shell, "PATH", shell->path);
 	else
 	{
@@ -91,16 +87,16 @@ t_env			*ft_get_env(char **envp)
 	t_env		*e;
 
 	if (!(e = (t_env *)ft_memalloc(sizeof(t_env))))
-		return (NULL);
+		exit(0);
 	e->name = ft_strdup("Shell > ");
 	if (!(e->p = ft_get_params()))
-		return (NULL);
+		exit(0);
 	if (!(e->str = ft_strdup("")))
-		return (NULL);
+		exit(0);
 	e->max = 0;
 	e->index = 0;
 	if (!(e->histo = (t_str *)ft_memalloc(sizeof(t_str))))
-		return (NULL);
+		exit(0);
 	e->env = ft_dup_environ(envp);
 	e->pwd = ft_get_env_value(e, "PWD");
 	e->home = ft_get_env_value(e, "HOME");

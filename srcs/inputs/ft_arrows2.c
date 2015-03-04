@@ -12,8 +12,6 @@
 
 #include "../../includes/ft_sh1.h"
 
-// arthur
-
 static void	ft_cursorup(t_env *e)
 {
 	size_t	len;

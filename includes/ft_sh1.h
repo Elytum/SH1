@@ -10,11 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-	Penser à aller à la ligne à la fin des imputs
-*/
-
-
 #ifndef FT_SH1_H
 # define FT_SH1_H
 # include <sys/param.h>
@@ -34,7 +29,7 @@
 # include <errno.h>
 # include <curses.h>
 # define MIN_W 10
-
+# define BYPASS struct	termios
 # define IS_REG(m) ((m & 0170000) == 0100000)
 
 typedef struct		s_params
@@ -47,6 +42,7 @@ typedef struct		s_params
 	char			r_char[4];
 	int				print;
 	tcflag_t		old_term;
+	BYPASS			*oldterm;
 	int				c_pos_x;
 	int				c_pos_y;
 	int				l_count;
@@ -167,11 +163,8 @@ char				*ft_rel_pwd(t_env *shell, char *path);
 t_env				*ft_call_env(t_env **shell);
 char				*ft_redup(char **str);
 
-//SIGNALS
-
 void				ft_init_signals(void);
 int					ft_reboot_imput(t_env *shell);
-// void				ft_restore_signals(t_env *shell);
-// void				ft_save_signals(t_env *shell);
+BYPASS				*sing_oldterm(BYPASS *term);
 
 #endif
