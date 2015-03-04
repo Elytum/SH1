@@ -46,13 +46,6 @@ static int		sizeoftab(t_env *e, int i)
 			if ((--size) == 0)
 				size = 8;
 		}
-		// if (pos + size > sizecol) // Si on est sur le point de depasser
-		// 	size = sizecol - pos; // On ajsute la tab sur le reste de la ligne
-		// else if (pos > sizecol) // Si on a depassé
-		// {
-		// 	pos = 0; // On se remet au debut
-		// 	size = 8; // Et on reset la taille de la tab
-		// }
 		ptr++;
 	}
 	return (size);
@@ -63,7 +56,7 @@ void			ft_goleft(t_env *e)
 	int			n;
 
 	if (e->str[e->index - 1] == '\t')
-		n = sizeoftab(e, e->index - 1);//n = 8;
+		n = sizeoftab(e, e->index - 1);
 	else
 		n = 1;
 	while (n-- > 0)
@@ -76,7 +69,7 @@ void			ft_goright(t_env *e)
 	int			n;
 	
 	if (e->str[e->index] == '\t')
-		n = sizeoftab(e, e->index);//n = 8;
+		n = sizeoftab(e, e->index);
 	else
 		n = 1;
 	while (n-- > 0)

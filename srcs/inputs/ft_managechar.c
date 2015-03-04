@@ -69,12 +69,14 @@ static int	ft_process_charloop(t_env *e, char *inputs)
 	i = 0;
 	while (inputs[i] && i < 7)
 	{
-		// if (inputs[i] <= 127)
-		// {
+		if (inputs[i] <= 127)
+		{
+			if (inputs[i] == 9)
+				inputs[i] = ' ';
 			tmp[0] = inputs[i];
 			inputs[i] = '\0';
 			ft_process_char2(e, tmp);
-		// }
+		}
 		i++;
 	}
 	return (i);
