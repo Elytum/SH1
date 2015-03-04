@@ -108,7 +108,7 @@ int					main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	ret = ft_minishell(envp);
-	system("leaks ft_minishell1");// > info/leaks.info");
+	// system("leaks ft_minishell1");// > info/leaks.info");
 	// system("cat info/leaks.info");
 	return (ret);
 }
