@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrows.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/06 14:16:08 by ade-bonn          #+#    #+#             */
-/*   Updated: 2015/02/06 14:16:09 by ade-bonn         ###   ########.fr       */
+/*   Created: 2015/03/04 21:38:02 by achazal           #+#    #+#             */
+/*   Updated: 2015/03/04 21:38:02 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ static void	ft_shelldown(t_env *e)
 
 static void	ft_leftright(t_env *e, char *inputs)
 {
-	// int n;
-
 	if (inputs[0] == 27 && inputs[1] == 91 && inputs[2] == 68)
 	{
 		if (e->index > 0)

@@ -166,5 +166,9 @@ char				*ft_redup(char **str);
 void				ft_init_signals(void);
 int					ft_reboot_imput(t_env *shell);
 BYPASS				*sing_oldterm(BYPASS *term);
+void				ignore(int sig_num);
+void				ft_sig_define_user(int sig_num);
+void				ft_sigprof(int sig_num);
+void				ft_sigtrap(int sig_num);
 
 #endif

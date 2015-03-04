@@ -43,7 +43,8 @@ FILES_INPUTS =	ft_arrows.c	\
 	ft_put.c				\
 	ft_moves.c
 
-FILES_SIGNALS =	ft_init.c
+FILES_SIGNALS =	ft_init.c	\
+	ft_init2.c
 
 OBJECT =	$(patsubst %.c,%.o,$(FILES_CORE))	\
 			$(patsubst %.c,%.o,$(FILES_INPUTS))	\
@@ -66,7 +67,6 @@ $(NAME):
 	@bash -c "sh setIcon.sh icon/gladosh_icon.png ft_minishell1"
 	@bash -c "touch auteur && echo \"achazal\" > auteur"
 	@bash -c "sh setIcon.sh icon/auteur_icon.png auteur"
-	echo $(CURRENT_DIR)
 
 clean :
 		rm -Rf $(OBJECT)

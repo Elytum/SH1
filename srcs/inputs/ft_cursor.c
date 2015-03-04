@@ -28,4 +28,3 @@ void		ft_endline(t_env *e)
 		ft_goright(e);
 	tputs("\n", 1, ft_putc);
 }
-

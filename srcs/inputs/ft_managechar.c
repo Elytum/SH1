@@ -6,7 +6,7 @@
 /*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/22 08:14:16 by achazal           #+#    #+#             */
-/*   Updated: 2015/02/06 14:08:43 by ade-bonn         ###   ########.fr       */
+/*   Updated: 2015/02/06 14:08:43 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	ft_process_lchar(t_env *e, char *inputs)
 	free(e->str);
 	e->str = tmp2;
 	tputs(e->str + e->index, 1, ft_putc);
-	flag = ((int)(e->max + ft_strlen(e->name)) % tgetnum("co") == (int)tgetnum("co") - 1);
+	flag = ((int)(e->max + ft_strlen(e->name)) %
+		tgetnum("co") == (int)tgetnum("co") - 1);
 	len = e->index + flag;
 	e->index = e->max;
 	while (len != e->index)

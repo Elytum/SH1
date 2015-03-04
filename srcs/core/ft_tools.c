@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 10:48:01 by ade-bonn          #+#    #+#             */
-/*   Updated: 2015/01/19 10:48:05 by ade-bonn         ###   ########.fr       */
+/*   Created: 2015/03/04 21:36:20 by achazal           #+#    #+#             */
+/*   Updated: 2015/03/04 21:36:20 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft/libft.h"
+#include "../../includes/ft_sh1.h"
 
-void		ft_free_strarray(char ***array)
+void				ft_free_strarray(char ***array)
 {
-	char	**ptr;
+	char			**ptr;
 
 	ptr = *array;
 	while (*ptr)
@@ -24,18 +25,18 @@ void		ft_free_strarray(char ***array)
 	free(*array);
 }
 
-void		ft_error_2char(char *str, char *str2)
+void				ft_error_2char(char *str, char *str2)
 {
 	ft_putstr(str);
 	ft_putendl(str2);
 }
 
-char		*ft_linkpath(char *s1, char *s2, char c)
+char				*ft_linkpath(char *s1, char *s2, char c)
 {
-	char	*str;
-	char	*ptr;
-	char	*p1;
-	char	*p2;
+	char			*str;
+	char			*ptr;
+	char			*p1;
+	char			*p2;
 
 	p1 = s1;
 	p2 = s2;
@@ -56,12 +57,25 @@ char		*ft_linkpath(char *s1, char *s2, char c)
 	return (str);
 }
 
-char		*ft_redup(char **str)
+char				*ft_redup(char **str)
 {
-	char	*tmp;
+	char			*tmp;
 
 	tmp = ft_strdup(*str);
 	free(*str);
 	*str = tmp;
 	return (*str);
+}
+
+t_env				*ft_call_env(t_env **shell)
+{
+	static t_env	*save;
+
+	if (shell && *shell)
+	{
+		save = *shell;
+		return (NULL);
+	}
+	else
+		return (save);
 }

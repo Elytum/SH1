@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 10:47:36 by ade-bonn          #+#    #+#             */
-/*   Updated: 2015/01/19 10:47:39 by ade-bonn         ###   ########.fr       */
+/*   Created: 2015/03/04 21:36:59 by achazal           #+#    #+#             */
+/*   Updated: 2015/03/04 21:37:00 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_sh1.h"
+
+void		ignore(int sig_num)
+{
+	(void)sig_num;
+	ft_putstr ("GladOsh : Program aborted : ./loop\n");
+}
 
 static void	ft_print_environ(t_env *shell)
 {
@@ -50,27 +56,11 @@ static int	ft_commandmatch(char *name, char *test)
 	return (0);
 }
 
-// void		ft_putargs(char **array)
-// {
-// 	char	**ptr;
-
-// 	ptr = array;
-// 	ft_putstr("Arguments are : ");
-// 	while (ptr && *ptr)
-// 	{
-// 		write(1, "\"", 1);
-// 		ft_putstr(*ptr++);
-// 		write(1, "\" ", 2);
-// 	}
-// 	write(1, "\n", 1);
-// }
-
 void		ft_parse_input(t_env *shell)
 {
 	if (*shell->str)
 	{
 		shell->av = ft_parse_args(shell, shell->str);
-		// ft_putargs(shell->av);
 		if ((shell->ac = ft_count_arg(shell->av)))
 		{
 			if (ft_commandmatch("env", shell->av[0]))

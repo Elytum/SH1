@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 10:48:01 by ade-bonn          #+#    #+#             */
-/*   Updated: 2015/01/19 10:48:05 by ade-bonn         ###   ########.fr       */
+/*   Created: 2015/03/04 21:37:42 by achazal           #+#    #+#             */
+/*   Updated: 2015/03/04 21:37:42 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int					ft_reboot_imput(t_env *shell)
 	return (0);
 }
 
-static int			ft_minishell(char **envp)
+int					main(int ac, char **av, char **envp)
 {
 	t_env			*shell;
 
@@ -85,30 +85,7 @@ static int			ft_minishell(char **envp)
 	tputs(tgetstr("ve", (char **)(&shell->p->buf)), 1, ft_putc);
 	tputs(tgetstr("vs", (char **)(&shell->p->buf)), 1, ft_putc);
 	ft_reboot_imput(shell);
-	// free(shell->name_shell);
-	// free(shell->name_process);
-	// while ((value = ft_get_inputs(shell)))
-	// {
-	// 	if (value == 0)
-	// 		ft_exit(shell);
-	// 	if (shell->str && *shell->str)
-	// 		ft_launch(shell);
-	// 	if (!(ft_clean_env(shell)))
-	// 		break ;
-	// }
 	return (0);
-	envp++;
-	// ft_launch(NULL);
-}
-
-int					main(int ac, char **av, char **envp)
-{
-	int				ret;
-
 	(void)ac;
 	(void)av;
-	ret = ft_minishell(envp);
-	// system("leaks ft_minishell1");// > info/leaks.info");
-	// system("cat info/leaks.info");
-	return (ret);
 }
