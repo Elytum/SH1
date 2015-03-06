@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    setIcon.sh                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: achazal <achazal@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/03/06 03:11:22 by achazal           #+#    #+#              #
+#    Updated: 2015/03/06 03:11:24 by achazal          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #!/bin/sh
 # Sets an icon on file or directory
 # Usage setIcon.sh iconimage.jpg /path/to/[file|folder]

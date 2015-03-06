@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strasplit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/14 14:22:52 by ade-bonn          #+#    #+#             */
-/*   Updated: 2015/02/15 14:30:24 by ade-bonn         ###   ########.fr       */
+/*   Created: 2015/03/06 03:08:03 by achazal           #+#    #+#             */
+/*   Updated: 2015/03/06 03:08:04 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static size_t	ft_nbr_words(char const *s, char *c)
 	nbr = 0;
 	while (s[i])
 	{
-		while (s[i] && ft_strchr(c,s[i]))
+		while (s[i] && ft_strchr(c, s[i]))
 			i++;
 		while (s[i] && !ft_strchr(c, s[i]))
 			i++;
