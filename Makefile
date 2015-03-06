@@ -43,8 +43,7 @@ FILES_INPUTS =	ft_arrows.c	\
 	ft_put.c				\
 	ft_moves.c
 
-FILES_SIGNALS =	ft_init.c	\
-	ft_init2.c
+FILES_SIGNALS =	ft_init.c
 
 OBJECT =	$(patsubst %.c,%.o,$(FILES_CORE))	\
 			$(patsubst %.c,%.o,$(FILES_INPUTS))	\

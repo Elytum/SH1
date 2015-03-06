@@ -12,9 +12,9 @@
 
 #include "../../includes/ft_sh1.h"
 
-t_params		*ft_get_params(void)
+t_params			*ft_get_params(void)
 {
-	t_params	*p;
+	t_params		*p;
 
 	if (!(p = (t_params *)ft_memalloc(sizeof(t_params))))
 		return (NULL);
@@ -36,7 +36,7 @@ t_params		*ft_get_params(void)
 	return (p);
 }
 
-int				ft_clean_env(t_env *e)
+int					ft_clean_env(t_env *e)
 {
 	if (e->str)
 	{
@@ -50,12 +50,21 @@ int				ft_clean_env(t_env *e)
 	return (1);
 }
 
-char			**ft_dup_environ(char **environ)
+BYPASS				*sing_oldterm(BYPASS *term)
 {
-	char		**ptr;
-	char		**bis;
-	char		**ptr2;
-	size_t		i;
+	static BYPASS	*old;
+
+	if (term != NULL)
+		old = term;
+	return (old);
+}
+
+char				**ft_dup_environ(char **environ)
+{
+	char			**ptr;
+	char			**bis;
+	char			**ptr2;
+	size_t			i;
 
 	i = 0;
 	ptr = environ;

@@ -13,27 +13,20 @@
 #include "../../includes/ft_sh1.h"
 #include <sys/stat.h>
 
-// t_env				*ft_call_env(t_env **shell)
-// {
-// 	static t_env	*save;
-
-// 	if (shell && *shell)
-// 	{
-// 		save = *shell;
-// 		return (NULL);
-// 	}
-// 	else
-// 		return (save);
-// }
-
 static void			ft_wrong_exit2(int sig_num)
 {
-	if (sig_num == SIGXCPU)
-		write(1, ": cpu limit exceeded ", 21);
+	if (sig_num == SIGBUS)
+		write(1, ": bus error ", 12);
 	else if (sig_num == SIGSEGV)
 		write(1, ": segmentation fault ", 21);
+	else if (sig_num == SIGSYS)
+		write(1, ": invalid system call ", 22);
 	else if (sig_num == SIGALRM)
-		write(1, ": ti", 4);
+		write(1, ": timeout ", 10);
+	else if (sig_num == SIGSTOP)
+		write(1, ": suspended (signal) ", 21);
+	else if (sig_num == SIGXCPU)
+		write(1, ": cpu limit exceeded ", 21);
 	else if (sig_num == SIGXFSZ)
 		write(1, ": size limit exceeded ", 22);
 	else if (sig_num == SIGVTALRM)
@@ -64,12 +57,12 @@ void				ft_wrong_exit(char *father, int sig_num, char *son)
 		write(1, ": trace trap shell", 18);
 	else if (sig_num == SIGABRT)
 		write(1, ": abort ", 8);
+	else if (sig_num == SIGEMT)
+		write(1, ": EMT instruction ", 18);
 	else if (sig_num == SIGFPE)
 		write(1, ": floating point exception ", 27);
 	else if (sig_num == SIGKILL)
 		write(1, ": killed ", 9);
-	else if (sig_num == SIGBUS)
-		write(1, ": bus error ", 12);
 	else
 		ft_wrong_exit2(sig_num);
 	ft_putendl(son);
@@ -110,7 +103,6 @@ void				ft_exec_bin(t_env *shell)
 
 	if (ft_set_binpath(shell) == 0)
 	{
-		
 		shell->cpid = fork();
 		if (shell->cpid != -1)
 		{
@@ -119,7 +111,6 @@ void				ft_exec_bin(t_env *shell)
 			else
 				waitpid(shell->cpid, &stat_loc, 0);
 		}
-		signal(SIGINT, SIG_IGN);
 		if (WIFSIGNALED(stat_loc))
 			ft_wrong_exit(shell->name_shell,
 				WTERMSIG(stat_loc), shell->binpath);
@@ -127,6 +118,5 @@ void				ft_exec_bin(t_env *shell)
 		free(shell->binpath);
 		shell->p = ft_get_params();
 		shell->cpid = 0;
-		signal(SIGINT, ft_sig_to_reload);
 	}
 }

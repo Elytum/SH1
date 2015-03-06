@@ -81,28 +81,6 @@ typedef struct		s_env
 	pid_t			cpid;
 	char			*name_shell;
 	char			*name_process;
-
-
-	void			*sigabrt;
-	void			*sigalrm;
-	void			*sigbus;
-	void			*sigfpe;
-	void			*sighup;
-	void			*sigill;
-	void			*sigint;
-	void			*sigkill;
-	void			*sigpipe;
-	void			*sigsegv;
-	void			*sigstop;
-	void			*sigterm;
-	void			*sigusr1;
-	void			*sigusr2;
-	void			*sigprof;
-	void			*sigsys;
-	void			*sigtrap;
-	void			*sigvtalrm;
-	void			*sigxcpu;
-	void			*sigxfsz;
 }					t_env;
 
 char				**ft_dup_environ(char **environ);
@@ -139,7 +117,6 @@ int					ft_putc(int c);
 void				ft_put_histo(t_env *e);
 void				ft_goleft(t_env *e);
 void				ft_goright(t_env *e);
-
 int					ft_namematch(char *name, char *var);
 void				ft_free_strarray(char ***array);
 char				**ft_get_env_addr(t_env *shell, char *name);
@@ -157,12 +134,11 @@ void				ft_set_env_value(t_env *shell, char *name, char *value);
 char				*ft_linkpath(char *s1, char *s2, char c);
 t_params			*ft_get_params(void);
 char				**ft_parse_args(t_env *shell, char *input);
-
-char				*ft_update(t_env *shell, char *elem, char *str, char *error);
+char				*ft_update(t_env *shell, char *elem, char *str,
+									char *error);
 char				*ft_rel_pwd(t_env *shell, char *path);
 t_env				*ft_call_env(t_env **shell);
 char				*ft_redup(char **str);
-
 void				ft_init_signals(void);
 int					ft_reboot_imput(t_env *shell);
 BYPASS				*sing_oldterm(BYPASS *term);
