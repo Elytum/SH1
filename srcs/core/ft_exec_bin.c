@@ -41,8 +41,13 @@ static void			ft_wrong_exit2(int sig_num)
 
 void				ft_wrong_exit(char *father, int sig_num, char *son)
 {
-	if (sig_num == SIGPIPE || sig_num == SIGINT)
+	if (sig_num == SIGPIPE)
 		return ;
+	if (sig_num == SIGINT)
+	{
+		write(1, "\n", 1);
+		return ;
+	}
 	ft_putstr(father);
 	if (sig_num == SIGHUP)
 		write(1, ": hangup ", 9);

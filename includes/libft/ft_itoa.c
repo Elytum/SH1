@@ -15,15 +15,14 @@
 char		*ft_itoa(int n)
 {
 	char	*str;
+	char	*new;
 	int		pos;
 	int		tmp;
 
 	pos = 0;
 	tmp = n;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n == 0)
-		return (ft_strdup("0"));
+	if (n == -2147483648 || n == 0)
+		return ((n == 0) ? ft_strdup("0") : ft_strdup("-2147483648"));
 	if (!(str = (char *)malloc(sizeof(char) * 12)))
 		return (NULL);
 	if (n < 0)
@@ -34,8 +33,9 @@ char		*ft_itoa(int n)
 		n = n / 10;
 	}
 	str[pos] = '\0';
-	if (tmp < 0)
-		str[pos++] = '-';
+	(tmp < 0) ? (str[pos++] = '-') : 0;
 	str[pos] = '\0';
-	return (ft_strrev(str));
+	new = ft_strrev(str);
+	free(str);
+	return (new);
 }
