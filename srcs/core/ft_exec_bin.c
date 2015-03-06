@@ -99,7 +99,6 @@ void				ft_exec_bin(t_env *shell)
 	if (ft_set_binpath(shell) == 0)
 	{
 		tcsetattr(0, TCSANOW, sing_oldterm(NULL));
-		// tcsetattr(0, 0, sing_oldterm(NULL));
 		shell->cpid = fork();
 		if (shell->cpid != -1)
 		{
