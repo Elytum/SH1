@@ -58,11 +58,11 @@ CURRENT_DIR = $(shell pwd)/$(NAME)
 all:$(NAME)
 
 $(NAME):
-	@make -C includes/libft
+	@make -C libft
 	@$(CC) -c $(CFLAGS)	$(addprefix $(BASEDIR_CORE)/, $(FILES_CORE)) \
 						$(addprefix $(BASEDIR_INPUTS)/, $(FILES_INPUTS)) \
 						$(addprefix $(BASEDIR_SIGNALS)/, $(FILES_SIGNALS))
-	@$(CC) -o $(NAME) $(OBJECT) -L ./includes/libft -l ft -L /usr/lib -ltermcap
+	@$(CC) -o $(NAME) $(OBJECT) -L ./libft -l ft -L /usr/lib -ltermcap
 	@bash -c "sh setIcon.sh icon/gladosh_icon.png ft_minishell1"
 	@bash -c "touch auteur && echo \"achazal\" > auteur"
 	@bash -c "sh setIcon.sh icon/auteur_icon.png auteur"

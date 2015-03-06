@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft/libft.h"
 #include "../../includes/ft_sh1.h"
 
 void				ft_free_strarray(char ***array)
