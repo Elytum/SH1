@@ -3,56 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/04 21:36:01 by achazal           #+#    #+#             */
-/*   Updated: 2015/03/04 21:36:02 by achazal          ###   ########.fr       */
+/*   Created: 2015/01/19 10:44:47 by ade-bonn          #+#    #+#             */
+/*   Updated: 2015/02/15 14:15:17 by ade-bonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_sh1.h"
 #include <sys/stat.h>
 
-static char			ft_isexec(char *path)
-{
-	struct stat sb;
+// t_env				*ft_call_env(t_env **shell)
+// {
+// 	static t_env	*save;
 
-	if (!stat(path, &sb))
-	{
-		if (IS_REG(sb.st_mode) && sb.st_mode & 0111)
-			return (1);
-	}
-	return (0);
-}
-
-static int			ft_set_binpath(t_env *shell)
-{
-	int				i;
-
-	i = 0;
-	if (shell->path != NULL)
-	{
-		if (ft_isexec(shell->av[0]))
-		{
-			shell->binpath = ft_strdup(shell->av[0]);
-			return (0);
-		}
-		while (shell->paths[i] && shell->av[0])
-		{
-			if ((shell->binpath = ft_linkpath(shell->paths[i++],\
-									shell->av[0], '/')))
-			{
-				if (ft_isexec(shell->binpath))
-					return (0);
-				free(shell->binpath);
-			}
-		}
-		ft_error_2char("shell: no such file or directory: ", shell->av[0]);
-	}
-	else
-		ft_error_2char("Undefined environment PATH :", shell->av[0]);
-	return (-1);
-}
+// 	if (shell && *shell)
+// 	{
+// 		save = *shell;
+// 		return (NULL);
+// 	}
+// 	else
+// 		return (save);
+// }
 
 static void			ft_wrong_exit2(int sig_num)
 {
@@ -98,13 +70,41 @@ void				ft_wrong_exit(char *father, int sig_num, char *son)
 	ft_putendl(son);
 }
 
+static int			ft_set_binpath(t_env *shell)
+{
+	int				i;
+
+	i = 0;
+	if (shell->path != NULL)
+	{
+		if (access(shell->av[0], X_OK) == 0)
+		{
+			shell->binpath = ft_strdup(shell->av[0]);
+			return (0);
+		}
+		while (shell->paths[i] && shell->av[0])
+		{
+			if ((shell->binpath = ft_linkpath(shell->paths[i++],\
+									shell->av[0], '/')))
+			{
+				if (access(shell->binpath, X_OK) == 0)
+					return (0);
+				free(shell->binpath);
+			}
+		}
+		ft_error_2char("shell: no such file or directory: ", shell->av[0]);
+	}
+	else
+		ft_error_2char("Undefined environment PATH :", shell->av[0]);
+	return (-1);
+}
+
 void				ft_exec_bin(t_env *shell)
 {
 	int				stat_loc;
 
 	if (ft_set_binpath(shell) == 0)
 	{
-		signal(SIGABRT, ignore);
 		shell->cpid = fork();
 		if (shell->cpid != -1)
 		{

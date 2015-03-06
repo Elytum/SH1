@@ -28,7 +28,7 @@ static void	ft_remove_from_env(t_env *shell, int pos, int size)
 			free(*penv++);
 		*ptr++ = *penv++;
 	}
-	*ptr = '\0';
+	*ptr = NULL;
 	free(shell->env);
 	shell->env = ne;
 }
