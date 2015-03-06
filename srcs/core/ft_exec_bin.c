@@ -13,6 +13,18 @@
 #include "../../includes/ft_sh1.h"
 #include <sys/stat.h>
 
+static char			ft_isexec(char *path)
+{
+	struct stat		sb;
+
+	if (!stat(path, &sb))
+	{
+		if (IS_REG(sb.st_mode) && sb.st_mode & 0111)
+			return (1);
+	}
+	return (0);
+}
+
 static void			ft_wrong_exit2(int sig_num)
 {
 	if (sig_num == SIGBUS)
@@ -75,7 +87,7 @@ static int			ft_set_binpath(t_env *shell)
 	i = 0;
 	if (shell->path != NULL)
 	{
-		if (access(shell->av[0], X_OK) == 0)
+		if (ft_isexec(shell->av[0]))
 		{
 			shell->binpath = ft_strdup(shell->av[0]);
 			return (0);
@@ -85,7 +97,7 @@ static int			ft_set_binpath(t_env *shell)
 			if ((shell->binpath = ft_linkpath(shell->paths[i++],\
 									shell->av[0], '/')))
 			{
-				if (access(shell->binpath, X_OK) == 0)
+				if (ft_isexec(shell->binpath))
 					return (0);
 				free(shell->binpath);
 			}
