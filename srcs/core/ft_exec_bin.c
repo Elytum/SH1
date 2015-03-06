@@ -28,14 +28,12 @@
 
 static void			ft_wrong_exit2(int sig_num)
 {
-	if (sig_num == SIGBUS)
-		write(1, ": bus error ", 12);
+	if (sig_num == SIGXCPU)
+		write(1, ": cpu limit exceeded ", 21);
 	else if (sig_num == SIGSEGV)
 		write(1, ": segmentation fault ", 21);
 	else if (sig_num == SIGALRM)
 		write(1, ": ti", 4);
-	else if (sig_num == SIGXCPU)
-		write(1, ": cpu limit exceeded ", 21);
 	else if (sig_num == SIGXFSZ)
 		write(1, ": size limit exceeded ", 22);
 	else if (sig_num == SIGVTALRM)
@@ -52,6 +50,11 @@ void				ft_wrong_exit(char *father, int sig_num, char *son)
 {
 	if (sig_num == SIGPIPE)
 		return ;
+	if (sig_num == SIGINT)
+	{
+		write(0, "^C\n", 3);
+		return ;
+	}
 	ft_putstr(father);
 	if (sig_num == SIGHUP)
 		write(1, ": hangup ", 9);
@@ -65,6 +68,8 @@ void				ft_wrong_exit(char *father, int sig_num, char *son)
 		write(1, ": floating point exception ", 27);
 	else if (sig_num == SIGKILL)
 		write(1, ": killed ", 9);
+	else if (sig_num == SIGBUS)
+		write(1, ": bus error ", 12);
 	else
 		ft_wrong_exit2(sig_num);
 	ft_putendl(son);
@@ -105,6 +110,7 @@ void				ft_exec_bin(t_env *shell)
 
 	if (ft_set_binpath(shell) == 0)
 	{
+		
 		shell->cpid = fork();
 		if (shell->cpid != -1)
 		{
@@ -113,6 +119,7 @@ void				ft_exec_bin(t_env *shell)
 			else
 				waitpid(shell->cpid, &stat_loc, 0);
 		}
+		signal(SIGINT, SIG_IGN);
 		if (WIFSIGNALED(stat_loc))
 			ft_wrong_exit(shell->name_shell,
 				WTERMSIG(stat_loc), shell->binpath);
@@ -120,5 +127,6 @@ void				ft_exec_bin(t_env *shell)
 		free(shell->binpath);
 		shell->p = ft_get_params();
 		shell->cpid = 0;
+		signal(SIGINT, ft_sig_to_reload);
 	}
 }
