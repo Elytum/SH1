@@ -80,7 +80,7 @@ int					main(int ac, char **av, char **envp)
 	tcgetattr(0, &ptr);
 	sing_oldterm(&ptr);
 	if (!(shell = ft_get_env(envp)))
-		ft_exit_properly();
+		ft_exit_properly(-1);
 	ft_call_env(&shell);
 	ft_init_signals();
 	shell->name_shell = ft_strdup("shell");

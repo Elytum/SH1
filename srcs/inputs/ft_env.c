@@ -87,16 +87,16 @@ t_env			*ft_get_env(char **envp)
 	t_env		*e;
 
 	if (!(e = (t_env *)ft_memalloc(sizeof(t_env))))
-		ft_exit_properly();
+		ft_exit_properly(-1);
 	e->name = ft_strdup("Shell > ");
 	if (!(e->p = ft_get_params()))
-		ft_exit_properly();
+		ft_exit_properly(-1);
 	if (!(e->str = ft_strdup("")))
-		ft_exit_properly();
+		ft_exit_properly(-1);
 	e->max = 0;
 	e->index = 0;
 	if (!(e->histo = (t_str *)ft_memalloc(sizeof(t_str))))
-		ft_exit_properly();
+		ft_exit_properly(-1);
 	e->env = ft_dup_environ(envp);
 	e->pwd = ft_get_env_value(e, "PWD");
 	e->home = ft_get_env_value(e, "HOME");

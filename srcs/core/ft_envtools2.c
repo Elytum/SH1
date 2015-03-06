@@ -33,7 +33,6 @@ static void	ft_add_env_value(t_env *shell, char *name, char *value)
 	*pnenv = NULL;
 	free(shell->env);
 	shell->env = nenv;
-	return ;
 }
 
 void		ft_set_env_value(t_env *shell, char *name, char *value)
@@ -86,8 +85,8 @@ void		ft_swap_env_value(t_env *shell, char *src, char *dst)
 	free(dstcpy);
 }
 
-void		ft_exit_properly(void)
+void		ft_exit_properly(int ret)
 {
 	tcsetattr(0, TCSANOW, sing_oldterm(NULL));
-	exit(0);
+	exit(ret);
 }

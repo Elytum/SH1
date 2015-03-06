@@ -69,7 +69,17 @@ int			ft_value_exist(t_env *shell, char *name)
 void		ft_exit(t_env *shell)
 {
 	int		i;
+	int		ret;
 
+	if (shell->ac > 2)
+	{
+		write(1, "exit: too many arguments\n", 25);
+		return ;
+	}
+	if (shell->ac == 1)
+		ret = 0;
+	else
+		ret = ft_atoi(shell->av[1]);
 	i = 0;
 	while (shell->env[i])
 		free(shell->env[i++]);
@@ -81,5 +91,5 @@ void		ft_exit(t_env *shell)
 	if (shell->av)
 		free(shell->av);
 	shell->pid = 0;
-	ft_exit_properly();
+	ft_exit_properly(ret);
 }

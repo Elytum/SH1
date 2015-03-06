@@ -59,7 +59,15 @@ static int	ft_cd_normal(t_env *shell, char *path)
 
 	if (access(path, F_OK) == 0)
 	{
-		chdir(path);
+		if (chdir(path))
+		{
+			write(1, "cd: permission denied: ", 23);
+			if (shell->ac == 3)
+				ft_putstr(path);
+			else
+				ft_putstr(shell->av[1]);
+			write(1, "\n", 1);
+		}
 		ft_copy_env_value(shell, "PWD", "OLDPWD");
 		tmp = getcwd(NULL, 0);
 		ft_set_env_value(shell, "PWD", tmp);
@@ -86,13 +94,14 @@ static int	ft_cd_double(t_env *shell)
 		ft_putchar('\n');
 		return (0);
 	}
-	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(pwd +
+	if (!(tmp = (char *)malloc(sizeof(char) * (1 + ft_strlen(pwd +
 		ft_strlen(shell->av[2]) - ft_strlen(shell->av[1]))))))
 		return (0);
 	ft_strncpy(tmp, pwd, ptr - pwd);
 	ft_strcpy(tmp + (ptr - pwd), shell->av[2]);
 	ft_strcpy(tmp + (ptr - pwd) + ft_strlen(shell->av[2]),
 				ptr + ft_strlen(shell->av[1]));
+	dprintf(1, "Swapping using %s and %s\n", tmp, pwd);
 	free(pwd);
 	v = ft_cd_normal(shell, tmp);
 	free(tmp);
