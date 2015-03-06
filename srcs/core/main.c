@@ -32,12 +32,30 @@ static char			**ft_get_envpath(t_env *shell)
 	return (path);
 }
 
+static char			**ft_splitinput(char *str)
+{
+	char			*ptr;
+
+	ptr = str;
+	while (*ptr)
+	{
+		if (ptr != str && *ptr == ';' && *(ptr - 1) == ';')
+		{
+			write(1, "zsh: parse error near `;;'\n", 27);
+			return (NULL);
+		}
+		ptr++;
+	}
+	return (ft_strsplit(str, ';'));
+}
+
 static void			ft_launch(t_env *shell)
 {
 	char			**inputs;
 	char			**ptr;
 
-	if (!(inputs = ft_strsplit(shell->str, ';')))
+//	if (!(inputs = ft_strsplit(shell->str, ';')))
+	if (!(inputs = ft_splitinput(shell->str)))
 		return ;
 	if (shell->str)
 	{
