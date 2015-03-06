@@ -12,12 +12,6 @@
 
 #include "../../includes/ft_sh1.h"
 
-void		ignore(int sig_num)
-{
-	(void)sig_num;
-	ft_putstr ("GladOsh : Program aborted : ./loop\n");
-}
-
 static void	ft_print_environ(t_env *shell)
 {
 	int		i;

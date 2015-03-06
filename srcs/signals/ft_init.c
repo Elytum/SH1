@@ -12,7 +12,7 @@
 
 #include "../../includes/ft_sh1.h"
 
-void				ft_sig_to_reload(int sig_num)
+static void			ft_sig_to_reload(int sig_num)
 {
 	t_env			*shell;
 
@@ -31,21 +31,7 @@ void				ft_sig_to_reload(int sig_num)
 	}
 }
 
-void				ft_sigterm(int sig_num)
-{
-	t_env			*shell;
-
-	shell = ft_call_env(NULL);
-	ft_putstr("\nGladOsh: Did you really try to kill me ? Hehe, no chance !\n");
-	free(shell->str);
-	shell->str = ft_strdup("");
-	shell->index = 0;
-	shell->max = 0;
-	return ;
-	(void)sig_num;
-}
-
-void				ft_sig_to_exit(int sig_num)
+static void			ft_sig_to_exit(int sig_num)
 {
 	t_env			*shell;
 

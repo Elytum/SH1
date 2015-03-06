@@ -12,7 +12,7 @@
 
 #include "../../includes/ft_sh1.h"
 
-void		ft_update_imput(t_env *e)
+void		ft_update_input(t_env *e)
 {
 	int len;
 

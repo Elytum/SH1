@@ -36,7 +36,7 @@ FILES_INPUTS =	ft_arrows.c	\
 	ft_cursor.c				\
 	ft_delete.c				\
 	ft_env.c				\
-	ft_imputs.c				\
+	ft_inputs.c				\
 	ft_clean.c				\
 	ft_lstrmanage.c			\
 	ft_managechar.c			\

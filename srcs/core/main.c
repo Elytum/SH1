@@ -56,7 +56,7 @@ static void			ft_launch(t_env *shell)
 	shell->str = NULL;
 }
 
-int					ft_reboot_imput(t_env *shell)
+int					ft_reboot_input(t_env *shell)
 {
 	int				value;
 
@@ -87,7 +87,7 @@ int					main(int ac, char **av, char **envp)
 	shell->name_process = ft_strdup("test");
 	tputs(tgetstr("ve", (char **)(&shell->p->buf)), 1, ft_putc);
 	tputs(tgetstr("vs", (char **)(&shell->p->buf)), 1, ft_putc);
-	ft_reboot_imput(shell);
+	ft_reboot_input(shell);
 	return (0);
 	(void)ac;
 	(void)av;

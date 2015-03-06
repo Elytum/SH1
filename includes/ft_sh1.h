@@ -97,9 +97,9 @@ int					ft_unsetenv(t_env *shell);
 int					ft_setenv(t_env *shell);
 int					ft_arrows(t_env *e, char *inputs);
 char				*ft_chardup(char c);
-int					ft_clear_imput(t_env *e);
+int					ft_clear_input(t_env *e);
 void				ft_clean_histo(t_env *e);
-void				ft_update_imput(t_env *e);
+void				ft_update_input(t_env *e);
 void				ft_endline(t_env *e);
 void				ft_cursor_to_end(t_env *e);
 int					ft_process_delete(t_env *e);
@@ -140,13 +140,8 @@ char				*ft_rel_pwd(t_env *shell, char *path);
 t_env				*ft_call_env(t_env **shell);
 char				*ft_redup(char **str);
 void				ft_init_signals(void);
-int					ft_reboot_imput(t_env *shell);
+int					ft_reboot_input(t_env *shell);
 BYPASS				*sing_oldterm(BYPASS *term);
 BYPASS				*sing_newterm(BYPASS *term);
-void				ignore(int sig_num);
-void				ft_sig_define_user(int sig_num);
-void				ft_sigprof(int sig_num);
-void				ft_sigtrap(int sig_num);
-void				ft_sig_to_reload(int sig_num);
 
 #endif

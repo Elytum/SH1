@@ -59,7 +59,7 @@ static int	ft_ctrlk(t_env *e)
 
 	if (e->index < e->max)
 	{
-		ft_clear_imput(e);
+		ft_clear_input(e);
 		tputs(tgetstr("cd", (char **)(&e->p->buf)), 1, ft_putc);
 		e->str[e->index] = '\0';
 		tmp = ft_strdup(e->str);

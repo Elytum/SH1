@@ -12,7 +12,7 @@
 
 #include "../../includes/ft_sh1.h"
 
-void			ft_update_shlvl(t_env *e)
+static void		ft_update_shlvl(t_env *e)
 {
 	char		**shlvl;
 	char		*v;
@@ -27,7 +27,7 @@ void			ft_update_shlvl(t_env *e)
 		ft_set_env_value(e, "SHLVL", "1");
 }
 
-void			ft_linkpathfree(char **str, char *new, char c)
+static void		ft_linkpathfree(char **str, char *new, char c)
 {
 	char		*tmp;
 
@@ -36,7 +36,7 @@ void			ft_linkpathfree(char **str, char *new, char c)
 	*str = tmp;
 }
 
-void			ft_composepath(t_env *shell)
+static void		ft_composepath(t_env *shell)
 {
 	if (shell->path)
 		free(shell->path);
@@ -61,7 +61,7 @@ void			ft_composepath(t_env *shell)
 	}
 }
 
-void			ft_ironshell(t_env *shell)
+static void		ft_ironshell(t_env *shell)
 {
 	if (!shell->pwd || !*shell->pwd || access(shell->pwd, F_OK))
 	{

@@ -12,9 +12,9 @@
 
 #include "../../includes/ft_sh1.h"
 
-char	*ft_update(t_env *shell, char *elem, char *str, char *error)
+char		*ft_update(t_env *shell, char *elem, char *str, char *error)
 {
-	char *path;
+	char	*path;
 
 	if ((path = ft_get_env_value(shell, elem)) && access(path, F_OK) == 0)
 		return (path);
@@ -29,7 +29,7 @@ char	*ft_update(t_env *shell, char *elem, char *str, char *error)
 	return (NULL);
 }
 
-char	*ft_rel_pwd(t_env *shell, char *path)
+char		*ft_rel_pwd(t_env *shell, char *path)
 {
 	char	*pwd;
 	char	*tmp;

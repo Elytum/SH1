@@ -39,7 +39,7 @@ static void			ft_wrong_exit2(int sig_num)
 		write(1, ": user-defined signal 2 shell", 29);
 }
 
-void				ft_wrong_exit(char *father, int sig_num, char *son)
+static void			ft_wrong_exit(char *father, int sig_num, char *son)
 {
 	if (sig_num == SIGPIPE)
 		return ;
