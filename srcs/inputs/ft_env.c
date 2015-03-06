@@ -42,7 +42,7 @@ static void		ft_composepath(t_env *shell)
 		free(shell->path);
 	shell->path = NULL;
 	if (access("/usr/local/bin", F_OK) == 0)
-		ft_linkpathfree(&(shell->path), "/usr/bin", ':');
+		ft_linkpathfree(&(shell->path), "/usr/local/bin", ':');
 	if (access("/usr/bin", F_OK) == 0)
 		ft_linkpathfree(&(shell->path), "/usr/bin", ':');
 	if (access("/bin", F_OK) == 0)

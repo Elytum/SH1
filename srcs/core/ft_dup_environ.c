@@ -15,6 +15,7 @@
 t_params			*ft_get_params(void)
 {
 	t_params		*p;
+	BYPASS			ptr;
 
 	if (!(p = (t_params *)ft_memalloc(sizeof(t_params))))
 		return (NULL);
@@ -24,15 +25,17 @@ t_params			*ft_get_params(void)
 	if (tgetent(p->buf, p->v_term) < 1)
 		return (NULL);
 	tcgetattr(0, &p->term);
+	tcgetattr(0, &ptr);
+	sing_oldterm(&ptr);
 	p->term.c_lflag &= ~(ICANON);
 	p->term.c_lflag &= ~(ECHO);
 	p->term.c_cc[VMIN] = 1;
 	p->term.c_cc[VTIME] = 0;
-	sing_oldterm(p->oldterm);
 	if (tcsetattr(0, TCSADRAIN, &p->term) == -1)
 		return (NULL);
 	p->max_size = 1;
 	p->col_count = 1;
+	sing_oldterm(&p->term);
 	return (p);
 }
 
@@ -57,6 +60,15 @@ BYPASS				*sing_oldterm(BYPASS *term)
 	if (term != NULL)
 		old = term;
 	return (old);
+}
+
+BYPASS				*sing_newterm(BYPASS *term)
+{
+	static BYPASS	*new;
+
+	if (term != NULL)
+		new = term;
+	return (new);
 }
 
 char				**ft_dup_environ(char **environ)

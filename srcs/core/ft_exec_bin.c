@@ -103,6 +103,7 @@ void				ft_exec_bin(t_env *shell)
 
 	if (ft_set_binpath(shell) == 0)
 	{
+		tcsetattr(0, 0, sing_oldterm(NULL));
 		shell->cpid = fork();
 		if (shell->cpid != -1)
 		{
@@ -114,9 +115,8 @@ void				ft_exec_bin(t_env *shell)
 		if (WIFSIGNALED(stat_loc))
 			ft_wrong_exit(shell->name_shell,
 				WTERMSIG(stat_loc), shell->binpath);
-		free(shell->p);
 		free(shell->binpath);
-		shell->p = ft_get_params();
 		shell->cpid = 0;
+		tcsetattr(0, 0, sing_newterm(NULL));
 	}
 }
