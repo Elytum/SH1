@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 14:07:53 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/11 14:08:10 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/06 04:24:35 by achazal           #+#    #+#             */
+/*   Updated: 2014/11/10 03:43:53 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+char				*ft_strtrim(char const *s)
 {
-	int len_space;
-	int len;
-	int	i;
+	unsigned int	first;
+	unsigned int	last;
 
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s) - 1;
-	len_space = 0;
-	i = 0;
-	while (s[i] && ft_isspace(s[i]))
+	first = 0;
+	if (s)
 	{
-		len_space++;
-		i++;
+		if (!ft_isspace(s[0]) || !ft_isspace(s[ft_strlen(s) - 1]))
+			return (strdup(s));
+		last = ft_strlen(s) - 1;
+		while (s[first] && ft_isspace(s[first]))
+			first++;
+		while (last > 0 && ft_isspace(s[last]))
+			last--;
+		if (last < first)
+			return (ft_strnew(0));
+		return (ft_strsub(s, first, last - first + 1));
 	}
-	while (len >= 0 && ft_isspace(s[len]))
-		len--;
-	return (ft_strsub(s, i, len - len_space + 1));
+	return (ft_strnew(0));
 }

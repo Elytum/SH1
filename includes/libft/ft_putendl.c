@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:01 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/05 18:01:17 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/04 17:43:25 by achazal           #+#    #+#             */
+/*   Updated: 2014/11/07 04:34:15 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl(char const *str)
+void	ft_putendl(char const *s)
 {
-	if (str != NULL)
-	{
-		ft_putstr(str);
-		ft_putchar('\n');
-	}
+	ft_putendl_fd(s, 1);
 }

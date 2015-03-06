@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcpy.c                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 11:05:35 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/04 11:05:37 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/06 10:32:13 by achazal           #+#    #+#             */
+/*   Updated: 2014/11/07 04:32:12 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "stdlib.h"
 
-void	*ft_memcpy(void *s1, const void *s2, size_t n)
+void		*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*c1;
-	char	*c2;
+	char	*way1;
+	char	*way2;
 
-	if (n == 0 || s1 == s2)
-		return (s1);
-	c1 = (char *)s1;
-	c2 = (char *)s2;
-	while (--n)
-		*c1++ = *c2++;
-	*c1 = *c2;
-	return (s1);
+	way1 = (char *)dst;
+	way2 = (char *)src;
+	while (n--)
+		*way1++ = *way2++;
+	return (dst);
 }

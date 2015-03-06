@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:03:38 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/05 18:03:39 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/04 17:34:55 by achazal           #+#    #+#             */
+/*   Updated: 2014/11/07 19:05:51 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int nb)
+void	ft_putnbr(int n)
 {
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		nb = -nb;
-	}
-	if (nb / 10 != 0)
-	{
-		ft_putnbr(nb / 10);
-	}
-	ft_putchar((nb % 10) + '0');
+	ft_putnbr_fd(n, 1);
 }

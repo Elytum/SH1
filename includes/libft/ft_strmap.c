@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/09 16:58:29 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/09 16:58:30 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/06 07:25:11 by achazal           #+#    #+#             */
+/*   Updated: 2014/11/10 14:04:09 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char		*ft_strmap(char const *s, char (*f)(char))
 {
-	char	*dst;
-	char	*tmp_dst;
+	char	*new;
+	char	*ptr;
 
-	if (s == NULL)
-		return (NULL);
-	dst = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (dst == NULL)
-		return (NULL);
-	tmp_dst = dst;
-	while (*s != '\0')
+	if (s && f)
 	{
-		*tmp_dst = (*f)(*s);
-		tmp_dst++;
-		s++;
+		new = ft_strdup(s);
+		ptr = new;
+		while (*ptr)
+		{
+			*ptr = f(*ptr);
+			ptr++;
+		}
+		return (new);
 	}
-	*tmp_dst = '\0';
-	return (dst);
+	if (s)
+		return (ft_strdup(s));
+	return (NULL);
 }

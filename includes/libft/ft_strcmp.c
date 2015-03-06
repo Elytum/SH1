@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/19 09:55:24 by ade-bonn          #+#    #+#             */
-/*   Updated: 2015/01/19 09:55:29 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/03 20:10:39 by achazal           #+#    #+#             */
+/*   Updated: 2015/01/28 21:51:10 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	index;
-
-	index = 0;
-	while ((s1[index] == s2[index]) && s1[index] != '\0' && s2[index] != '\0')
-		index = index + 1;
-	return ((s1[index] - s2[index]));
+	if (s1)
+		return (ft_strncmp(s1, s2, ft_strlen(s1) + 1));
+	return (0);
 }

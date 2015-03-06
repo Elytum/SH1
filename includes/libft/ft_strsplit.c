@@ -3,57 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/14 14:22:52 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/14 14:25:35 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/08 13:10:29 by achazal           #+#    #+#             */
+/*   Updated: 2014/12/27 23:21:27 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_nbr_words(char const *s, char c)
+size_t			ft_count_words(char const *s, char sep)
 {
-	int			i;
-	int			nbr;
+	size_t		ret;
 
-	i = 0;
-	nbr = 0;
-	while (s[i])
+	ret = 0;
+	while (s && *s)
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		while (s[i] && s[i] != c)
-			i++;
-		if (s[i] != '\0' || s[i - 1] != c)
-			nbr++;
+		if (*s == sep)
+			ret++;
+		while (*s == sep)
+			s++;
+		s++;
 	}
-	return (nbr);
+	return (ret);
+}
+
+size_t			ft_strlen_ptr(char const *start, char const *end)
+{
+	if (!end)
+		return (ft_strlen(start));
+	return (((unsigned char*)end - (unsigned char *)start));
+}
+
+static char		*trim_chars(char *ptr, char c)
+{
+	while (ptr && *ptr == c)
+		ptr++;
+	return (ptr);
+}
+
+static char		*trim_word(char *ptr, char c)
+{
+	while (ptr && (*ptr != c) && *ptr)
+		ptr++;
+	return (ptr);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char		**str;
-	size_t		i;
-	size_t		j;
+	char		*ptr;
+	char		*orig;
+	char		**ret;
+	char		**p_ret;
 	size_t		len;
 
-	i = 0;
-	if (s == NULL)
-		return (NULL);
-	len = ft_nbr_words(s, c);
-	str = (char **)malloc(sizeof(char *) * len + 1);
-	while (i < len)
+	len = ft_count_words(s, c);
+	ret = (char **)ft_memalloc(sizeof(char *) * (len + 1));
+	ptr = (char *)s;
+	p_ret = ret;
+	while (ptr && *ptr)
 	{
-		j = 0;
-		while (*s && *s == c)
-			s = s + 1;
-		while (*(s + j) && *(s + j) != c)
-			j++;
-		*(str++) = ft_strsub(s, 0, j);
-		s = s + j;
-		i++;
+		ptr = trim_chars(ptr, c);
+		orig = ptr;
+		ptr = trim_word(ptr, c);
+		len = ft_strlen_ptr(orig, ptr);
+		if (orig && p_ret && *orig)
+			*p_ret++ = ft_strsub(orig, 0, len);
+		if (!*ptr)
+			break ;
+		ptr++;
 	}
-	*str = NULL;
-	return (str - len);
+	*p_ret = NULL;
+	return (ret);
 }

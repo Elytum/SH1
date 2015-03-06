@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 09:45:05 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/28 09:49:37 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/03 18:07:27 by achazal           #+#    #+#             */
+/*   Updated: 2015/01/03 00:14:36 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
+#include <string.h>
 
-int	ft_strlen(const char *s)
+size_t				ft_strlen(const char *str)
 {
-	size_t	len;
+	register char	*ptr;
 
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	ptr = (char *)str;
+	while (*ptr)
+		ptr++;
+	return (ptr - str);
 }

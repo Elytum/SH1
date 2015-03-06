@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-bonn <ade-bonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achazal <achazal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/09 15:47:17 by ade-bonn          #+#    #+#             */
-/*   Updated: 2014/11/09 15:51:16 by ade-bonn         ###   ########.fr       */
+/*   Created: 2014/11/06 08:22:21 by achazal           #+#    #+#             */
+/*   Updated: 2014/11/10 01:33:08 by achazal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 void	ft_strclr(char *s)
 {
-	int	i;
-
 	if (s)
-	{
-		i = ft_strlen(s);
-		while (i >= 0)
-		{
-			s[i] = '\0';
-			i--;
-		}
-	}
+		bzero(s, ft_strlen(s) + 1);
 }
