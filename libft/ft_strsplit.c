@@ -12,67 +12,48 @@
 
 #include "libft.h"
 
-size_t			ft_count_words(char const *s, char sep)
+static size_t	ft_nbr_words(char const *s, char c)
 {
-	size_t		ret;
+	int			i;
+	int			nbr;
 
-	ret = 0;
-	while (s && *s)
+	i = 0;
+	nbr = 0;
+	while (s[i])
 	{
-		if (*s == sep)
-			ret++;
-		while (*s == sep)
-			s++;
-		s++;
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
+			i++;
+		if (s[i] != '\0' || s[i - 1] != c)
+			nbr++;
 	}
-	return (ret);
-}
-
-size_t			ft_strlen_ptr(char const *start, char const *end)
-{
-	if (!end)
-		return (ft_strlen(start));
-	return (((unsigned char*)end - (unsigned char *)start));
-}
-
-static char		*trim_chars(char *ptr, char c)
-{
-	while (ptr && *ptr == c)
-		ptr++;
-	return (ptr);
-}
-
-static char		*trim_word(char *ptr, char c)
-{
-	while (ptr && (*ptr != c) && *ptr)
-		ptr++;
-	return (ptr);
+	return (nbr);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char		*ptr;
-	char		*orig;
-	char		**ret;
-	char		**p_ret;
+	char		**str;
+	size_t		i;
+	size_t		j;
 	size_t		len;
 
-	len = ft_count_words(s, c);
-	ret = (char **)ft_memalloc(sizeof(char *) * (len + 1));
-	ptr = (char *)s;
-	p_ret = ret;
-	while (ptr && *ptr)
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	len = ft_nbr_words(s, c);
+	str = (char **)malloc(sizeof(char *) * len + 1);
+	while (i < len)
 	{
-		ptr = trim_chars(ptr, c);
-		orig = ptr;
-		ptr = trim_word(ptr, c);
-		len = ft_strlen_ptr(orig, ptr);
-		if (orig && p_ret && *orig)
-			*p_ret++ = ft_strsub(orig, 0, len);
-		if (!*ptr)
-			break ;
-		ptr++;
+		j = 0;
+		while (*s && *s == c)
+			s = s + 1;
+		while (*(s + j) && *(s + j) != c)
+			j++;
+		*(str++) = ft_strsub(s, 0, j);
+		s = s + j;
+		i++;
 	}
-	*p_ret = NULL;
-	return (ret);
+	*str = NULL;
+	return (str - len);
 }

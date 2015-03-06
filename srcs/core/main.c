@@ -54,7 +54,6 @@ static void			ft_launch(t_env *shell)
 	char			**inputs;
 	char			**ptr;
 
-//	if (!(inputs = ft_strsplit(shell->str, ';')))
 	if (!(inputs = ft_splitinput(shell->str)))
 		return ;
 	if (shell->str)
