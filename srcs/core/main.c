@@ -80,7 +80,7 @@ int					main(int ac, char **av, char **envp)
 	tcgetattr(0, &ptr);
 	sing_oldterm(&ptr);
 	if (!(shell = ft_get_env(envp)))
-		return (0);
+		ft_exit_properly();
 	ft_call_env(&shell);
 	ft_init_signals();
 	shell->name_shell = ft_strdup("shell");
@@ -88,6 +88,7 @@ int					main(int ac, char **av, char **envp)
 	tputs(tgetstr("ve", (char **)(&shell->p->buf)), 1, ft_putc);
 	tputs(tgetstr("vs", (char **)(&shell->p->buf)), 1, ft_putc);
 	ft_reboot_input(shell);
+	tcsetattr(0, TCSANOW, sing_oldterm(NULL));
 	return (0);
 	(void)ac;
 	(void)av;

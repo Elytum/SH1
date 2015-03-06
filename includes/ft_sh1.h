@@ -143,5 +143,6 @@ void				ft_init_signals(void);
 int					ft_reboot_input(t_env *shell);
 BYPASS				*sing_oldterm(BYPASS *term);
 BYPASS				*sing_newterm(BYPASS *term);
+void				ft_exit_properly(void);
 
 #endif

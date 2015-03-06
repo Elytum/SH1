@@ -85,3 +85,9 @@ void		ft_swap_env_value(t_env *shell, char *src, char *dst)
 	free(srccpy);
 	free(dstcpy);
 }
+
+void		ft_exit_properly(void)
+{
+	tcsetattr(0, TCSANOW, sing_oldterm(NULL));
+	exit(0);
+}

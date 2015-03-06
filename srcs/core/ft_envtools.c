@@ -81,5 +81,5 @@ void		ft_exit(t_env *shell)
 	if (shell->av)
 		free(shell->av);
 	shell->pid = 0;
-	exit(shell->pid);
+	ft_exit_properly();
 }
