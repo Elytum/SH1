@@ -67,8 +67,7 @@ int			ft_setenv(t_env *shell)
 	{
 		if (ft_got_space(shell->av[1]))
 			ft_error_2char("setenv: not valid in this context: ", shell->av[1]);
-		else if (ft_get_env_addr(shell, shell->av[1]))
-			ft_set_env_value(shell, shell->av[1], shell->av[2]);
+		ft_set_env_value(shell, shell->av[1], shell->av[2]);
 	}
 	else
 		ft_putstr("setenv: wrong usage: setenv [var] [value]\n");
