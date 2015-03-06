@@ -37,26 +37,8 @@ static int	ft_cd_less(t_env *shell)
 	return (0);
 }
 
-static int	ft_cd_home(t_env *shell)
-{
-	char	*path;
-
-	if ((path = ft_update(shell, "HOME", shell->home,
-							" cd: << HOME >> undefined\n\n")))
-	{
-		ft_set_env_value(shell, "PWD", path);
-		chdir(path);
-		free(shell->pwd);
-		shell->pwd = path;
-		return (1);
-	}
-	return (0);
-}
-
 static int	ft_cd_normal(t_env *shell, char *path)
 {
-	char	*tmp;
-
 	if (access(path, F_OK) == 0)
 	{
 		if (chdir(path))
@@ -69,10 +51,31 @@ static int	ft_cd_normal(t_env *shell, char *path)
 			write(1, "\n", 1);
 		}
 		ft_copy_env_value(shell, "PWD", "OLDPWD");
-		tmp = getcwd(NULL, 0);
-		ft_set_env_value(shell, "PWD", tmp);
 		free(shell->pwd);
-		shell->pwd = tmp;
+		shell->pwd = getcwd(NULL, 0);
+		ft_set_env_value(shell, "PWD", shell->pwd);
+		return (1);
+	}
+	else
+	{
+		write(1, "cd: no such file or directory: ", 31);
+		ft_putstr(path);
+		write(1, "\n", 1);
+	}
+	return (0);
+}
+
+static int	ft_cd_home(t_env *shell)
+{
+	char	*path;
+
+	if ((path = ft_update(shell, "HOME", shell->home,
+		" cd: << HOME >> undefined\n\n")))
+	{
+		ft_set_env_value(shell, "PWD", path);
+		chdir(path);
+		free(shell->pwd);
+		shell->pwd = path;
 		return (1);
 	}
 	return (0);
@@ -86,25 +89,24 @@ static int	ft_cd_double(t_env *shell)
 	int		v;
 
 	if (!(pwd = ft_get_env_value(shell, "PWD")))
-		pwd = ft_strdup(shell->pwd);
+		if (!(pwd = ft_strdup(shell->pwd)))
+			return (0);
 	if (!(ptr = ft_strstr(pwd, shell->av[1])))
 	{
-		ft_putstr("cd: string not in pwd: ");
-		ft_putstr(shell->av[1]);
-		ft_putchar('\n');
+		write(1, "cd: string not in pwd: ", 23);
+		ft_putendl(shell->av[1]);
+		free(pwd);
 		return (0);
 	}
-	if (!(tmp = (char *)malloc(sizeof(char) * (1 + ft_strlen(pwd +
-		ft_strlen(shell->av[2]) - ft_strlen(shell->av[1]))))))
+	if (!(tmp = (char *)ft_memalloc(sizeof(char) * (ft_strlen(pwd) +
+		ft_strlen(shell->av[2]) - ft_strlen(shell->av[1])))))
 		return (0);
 	ft_strncpy(tmp, pwd, ptr - pwd);
 	ft_strcpy(tmp + (ptr - pwd), shell->av[2]);
-	ft_strcpy(tmp + (ptr - pwd) + ft_strlen(shell->av[2]),
-				ptr + ft_strlen(shell->av[1]));
-	dprintf(1, "Swapping using %s and %s\n", tmp, pwd);
-	free(pwd);
+	ft_strcpy(tmp + ft_strlen(tmp), ptr + ft_strlen(shell->av[1]));
 	v = ft_cd_normal(shell, tmp);
 	free(tmp);
+	free(pwd);
 	return (v);
 }
 
@@ -127,8 +129,7 @@ int			ft_cd(t_env *shell)
 			return (ft_cd_less(shell));
 		path = (shell->av[1][0] && shell->av[1][0] != '/')
 			? ft_rel_pwd(shell, shell->av[1]) : ft_strdup(shell->av[1]);
-		if (!ft_cd_normal(shell, path))
-			ft_error_2char("cd: no such file or directory: ", shell->av[1]);
+		ft_cd_normal(shell, path);
 		free(path);
 		return (1);
 	}

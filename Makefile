@@ -12,7 +12,7 @@
 
 # -------------Compilateur------------------#
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes -O3 -g
+CFLAGS = -Wall -Wextra -Werror -I./includes -g
 #--------------Name-------------------------#
 NAME = ft_minishell1
 
