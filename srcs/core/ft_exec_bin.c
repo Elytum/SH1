@@ -41,13 +41,8 @@ static void			ft_wrong_exit2(int sig_num)
 
 void				ft_wrong_exit(char *father, int sig_num, char *son)
 {
-	if (sig_num == SIGPIPE)
+	if (sig_num == SIGPIPE || sig_num == SIGINT)
 		return ;
-	if (sig_num == SIGINT)
-	{
-		write(0, "^C\n", 3);
-		return ;
-	}
 	ft_putstr(father);
 	if (sig_num == SIGHUP)
 		write(1, ": hangup ", 9);
@@ -103,7 +98,8 @@ void				ft_exec_bin(t_env *shell)
 
 	if (ft_set_binpath(shell) == 0)
 	{
-		tcsetattr(0, 0, sing_oldterm(NULL));
+		tcsetattr(0, TCSANOW, sing_oldterm(NULL));
+		// tcsetattr(0, 0, sing_oldterm(NULL));
 		shell->cpid = fork();
 		if (shell->cpid != -1)
 		{

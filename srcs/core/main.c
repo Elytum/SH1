@@ -75,7 +75,10 @@ int					ft_reboot_imput(t_env *shell)
 int					main(int ac, char **av, char **envp)
 {
 	t_env			*shell;
+	BYPASS			ptr;
 
+	tcgetattr(0, &ptr);
+	sing_oldterm(&ptr);
 	if (!(shell = ft_get_env(envp)))
 		return (0);
 	ft_call_env(&shell);
