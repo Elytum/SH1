@@ -36,12 +36,18 @@ static void			ft_sig_to_exit(int sig_num)
 	t_env			*shell;
 
 	shell = ft_call_env(NULL);
-	if (!(shell->cpid))
+	signal(sig_num, SIG_DFL);
+	if (shell->cpid)
 	{
-		tcsetattr(0, 0, sing_oldterm(NULL));
-		signal(sig_num, SIG_DFL);
-		kill(getpid(), sig_num);
+		write(1, "Due to signal ", 14);
+		ft_putnbr(sig_num);
+		write(1, ", ", 2);
+		ft_putstr(shell->name_shell);
+		write(1, " decided to kill his son.", 25);
+		kill(shell->cpid, sig_num);
 	}
+	tcsetattr(0, TCSANOW, sing_oldterm(NULL));
+	kill(getpid(), sig_num);
 }
 
 static void			ft_init_signals2(void)
