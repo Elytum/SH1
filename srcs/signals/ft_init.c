@@ -43,7 +43,9 @@ static void			ft_sig_to_exit(int sig_num)
 		ft_putnbr(sig_num);
 		write(1, ", ", 2);
 		ft_putstr(shell->name_shell);
-		write(1, " decided to kill his son.\n", 26);
+		write(1, " decided to kill his son, who's PID is ", 39);
+		ft_putnbr(shell->cpid);
+		write(1, ".\n", 26);
 		kill(shell->cpid, sig_num);
 	}
 	tcsetattr(0, TCSANOW, sing_oldterm(NULL));
